@@ -1,0 +1,22 @@
+[
+  {
+    "issue": "Order marked as delivered but not received.",
+    "actions_taken": "Customer checked with neighbors and building front desk.",
+    "requested_resolution": "Replacement or refund as soon as possible."
+  },
+  {
+    "issue": "The employee cannot log into the internal HR portal.",
+    "actions_taken": "Reset the password twice and tried another browser.",
+    "requested_resolution": "Need access today to download tax documents."
+  },
+  {
+    "issue": "Mobile app crashes during checkout.",
+    "actions_taken": "User tried uninstalling and reinstalling the app.",
+    "requested_resolution": "User wants to complete the purchase before tonight\u2019s promotion ends."
+  },
+  {
+    "issue": "User wants to change the color of the system buttons.",
+    "actions_taken": "User hasn't tried any troubleshooting steps yet.",
+    "requested_resolution": "Change the color of the system buttons."
+  }
+]
