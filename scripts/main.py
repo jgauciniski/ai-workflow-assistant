@@ -1,5 +1,7 @@
 import json
-from llm import ask_llm
+from pathlib import Path
+
+from app.workflows import process_ticket
 
 tickets = [
     """
@@ -23,19 +25,6 @@ tickets = [
     """
 ]
 
-system_prompt = """
-You are an AI assistant for support operations.
-
-Extract the information and return ONLY valid JSON in this format:
-
-{
-  "issue": "...",
-  "actions_taken": "...",
-  "requested_resolution": "..."
-}
-
-Do not include any extra text. Only JSON.
-"""
 
 processed_tickets = []
 
@@ -43,19 +32,13 @@ for index, ticket in enumerate(tickets, start=1):
     print(f"\n--- Ticket {index} ---")
 
     try:
-        result = ask_llm(system_prompt=system_prompt, user_prompt=ticket)
-        parsed_result = json.loads(result)
+        enriched_ticket = process_ticket(ticket)
+        processed_tickets.append(enriched_ticket)
 
-        processed_tickets.append(parsed_result)
-
-        print("Issue:", parsed_result["issue"])
-        print("Actions taken:", parsed_result["actions_taken"])
-        print("Requested resolution:", parsed_result["requested_resolution"])
-
-    except json.JSONDecodeError:
-        print("ERROR: Model did not return valid JSON.")
-        print("Raw output was:")
-        print(result)
+        print("Issue:", enriched_ticket["issue"])
+        print("Actions taken:", enriched_ticket["actions_taken"])
+        print("Requested resolution:", enriched_ticket["requested_resolution"])
+        print("Priority:", enriched_ticket["priority"])
 
     except Exception as error:
         print("ERROR: Something unexpected happened.")
@@ -64,7 +47,9 @@ for index, ticket in enumerate(tickets, start=1):
 print("\n=== Final processed tickets list ===")
 print(processed_tickets)
 
-with open("processed_tickets.json", "w", encoding="utf-8") as file:
+output_path = Path(__file__).resolve().parent.parent / "data" / "processed_tickets.json"
+
+with open(output_path, "w", encoding="utf-8") as file:
     json.dump(processed_tickets, file, indent=2)
 
 print("\nSaved results to processed_tickets.json")

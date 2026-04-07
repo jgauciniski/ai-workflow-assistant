@@ -1,0 +1,14 @@
+[
+  {
+    "issue": "Unable to access HR system",
+    "actions_taken": "Checked for internet connectivity and confirmed the issue persists across multiple devices.",
+    "requested_resolution": "Restore access to the HR system.",
+    "priority": "high"
+  },
+  {
+    "issue": "Did not receive order",
+    "actions_taken": "Checked order status",
+    "requested_resolution": "Help with locating the order",
+    "priority": "medium"
+  }
+]
