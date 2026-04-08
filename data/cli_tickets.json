@@ -10,5 +10,23 @@
     "actions_taken": "Checked order status",
     "requested_resolution": "Help with locating the order",
     "priority": "medium"
+  },
+  {
+    "issue": "User dislikes the colors of the tech support session on the website.",
+    "actions_taken": "No actions taken yet.",
+    "requested_resolution": "Change the colors of the tech support session on the website.",
+    "priority": "low"
+  },
+  {
+    "issue": "The website is offline.",
+    "actions_taken": "Checked server status and confirmed downtime.",
+    "requested_resolution": "Restore website functionality.",
+    "priority": "high"
+  },
+  {
+    "issue": "Did not receive response from support",
+    "actions_taken": "Checked email for responses and submitted a follow-up inquiry",
+    "requested_resolution": "Prompt response from support team",
+    "priority": "medium"
   }
 ]

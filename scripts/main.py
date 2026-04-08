@@ -1,7 +1,8 @@
 import json
 from pathlib import Path
 
-from app.workflows import process_ticket
+from app.services import handle_batch_tickets
+from app.session import Session
 
 tickets = [
     """
@@ -26,23 +27,15 @@ tickets = [
 ]
 
 
-processed_tickets = []
+session = Session()
+processed_tickets = handle_batch_tickets(session, tickets)
 
-for index, ticket in enumerate(tickets, start=1):
+for index, ticket in enumerate(processed_tickets, start=1):
     print(f"\n--- Ticket {index} ---")
-
-    try:
-        enriched_ticket = process_ticket(ticket)
-        processed_tickets.append(enriched_ticket)
-
-        print("Issue:", enriched_ticket["issue"])
-        print("Actions taken:", enriched_ticket["actions_taken"])
-        print("Requested resolution:", enriched_ticket["requested_resolution"])
-        print("Priority:", enriched_ticket["priority"])
-
-    except Exception as error:
-        print("ERROR: Something unexpected happened.")
-        print(error)
+    print("Issue:", ticket["issue"])
+    print("Actions taken:", ticket["actions_taken"])
+    print("Requested resolution:", ticket["requested_resolution"])
+    print("Priority:", ticket["priority"])
 
 print("\n=== Final processed tickets list ===")
 print(processed_tickets)

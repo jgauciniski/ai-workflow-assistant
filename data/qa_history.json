@@ -1,14 +1,80 @@
 [
   {
-    "question": "how many high priotity tickets do I have",
+    "issue": "Unable to access HR system",
+    "actions_taken": "Checked for internet connectivity and confirmed the issue persists across multiple devices.",
+    "requested_resolution": "Restore access to the HR system.",
+    "priority": "high"
+  },
+  {
+    "issue": "Did not receive order",
+    "actions_taken": "Checked order status",
+    "requested_resolution": "Help with locating the order",
+    "priority": "medium"
+  },
+  {
+    "question": "how long takes to get a response from technical support?",
     "retrieved_tickets": [
       {
         "issue": "Unable to access HR system",
         "actions_taken": "Checked for internet connectivity and confirmed the issue persists across multiple devices.",
         "requested_resolution": "Restore access to the HR system.",
         "priority": "high"
+      },
+      {
+        "issue": "Did not receive order",
+        "actions_taken": "Checked order status",
+        "requested_resolution": "Help with locating the order",
+        "priority": "medium"
+      },
+      {
+        "issue": "User dislikes the colors of the tech support session on the website.",
+        "actions_taken": "No actions taken yet.",
+        "requested_resolution": "Change the colors of the tech support session on the website.",
+        "priority": "low"
+      },
+      {
+        "issue": "The website is offline.",
+        "actions_taken": "Checked server status and confirmed downtime.",
+        "requested_resolution": "Restore website functionality.",
+        "priority": "high"
       }
     ],
-    "answer": "You have one high priority ticket."
+    "answer": "The provided data does not include information about response times from technical support."
+  },
+  {
+    "question": "is there a phone number for tech support?",
+    "retrieved_tickets": [
+      {
+        "issue": "Unable to access HR system",
+        "actions_taken": "Checked for internet connectivity and confirmed the issue persists across multiple devices.",
+        "requested_resolution": "Restore access to the HR system.",
+        "priority": "high"
+      },
+      {
+        "issue": "Did not receive order",
+        "actions_taken": "Checked order status",
+        "requested_resolution": "Help with locating the order",
+        "priority": "medium"
+      },
+      {
+        "issue": "User dislikes the colors of the tech support session on the website.",
+        "actions_taken": "No actions taken yet.",
+        "requested_resolution": "Change the colors of the tech support session on the website.",
+        "priority": "low"
+      },
+      {
+        "issue": "The website is offline.",
+        "actions_taken": "Checked server status and confirmed downtime.",
+        "requested_resolution": "Restore website functionality.",
+        "priority": "high"
+      },
+      {
+        "issue": "Did not receive response from support",
+        "actions_taken": "Checked email for responses and submitted a follow-up inquiry",
+        "requested_resolution": "Prompt response from support team",
+        "priority": "medium"
+      }
+    ],
+    "answer": "The provided data does not include any information about a phone number for tech support."
   }
 ]
