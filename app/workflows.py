@@ -1,4 +1,8 @@
 import json
+import os
+
+from dotenv import load_dotenv
+from openai import OpenAI
 
 from app.llm import ask_llm
 from app.prompts import (
@@ -6,7 +10,15 @@ from app.prompts import (
     CLASSIFICATION_PROMPT,
     QUESTION_ANSWER_PROMPT,
 )
+from app.retrieval import EmbeddingService, Retriever
 
+def build_ticket_text(ticket: dict) -> str:
+    return f"""
+Issue: {ticket.get("issue", "")}
+Actions taken: {ticket.get("actions_taken", "")}
+Requested resolution: {ticket.get("requested_resolution", "")}
+Priority: {ticket.get("priority", "")}
+""".strip()
 
 def process_ticket(ticket_text: str) -> dict:
     extraction_result = ask_llm(
@@ -34,6 +46,18 @@ Requested resolution: {parsed_ticket["requested_resolution"]}
         "priority": parsed_priority["priority"]
     }
 
+    load_dotenv()
+    api_key = os.getenv("OPENAI_API_KEY")
+    if not api_key:
+        raise ValueError("OPENAI_API_KEY is not set.")
+
+    client = OpenAI(api_key=api_key)
+    embedding_service = EmbeddingService(client)
+
+    enriched_ticket["embedding"] = embedding_service.embed_text(
+        build_ticket_text(enriched_ticket)
+    )
+
     return enriched_ticket
 
 
@@ -57,27 +81,32 @@ Question:
     return answer, relevant_tickets
 
 def select_relevant_tickets(saved_tickets: list, question: str) -> list:
-    cleaned_question = question.lower().replace("?", "").replace(":", "").replace(",", "")
-    keywords = [
-        word for word in cleaned_question.split()
-        if word not in {"which", "what", "are", "is", "the", "about", "tickets", "ticket"}
-    ]
+    if not saved_tickets:
+        return []
 
-    relevant = []
+    load_dotenv()
+    api_key = os.getenv("OPENAI_API_KEY")
+    if not api_key:
+        raise ValueError("OPENAI_API_KEY is not set.")
 
-    for ticket in saved_tickets:
-        text = (
-            ticket["issue"] +
-            ticket["actions_taken"] +
-            ticket["requested_resolution"]
-        ).lower()
+    client = OpenAI(api_key=api_key)
+    embedding_service = EmbeddingService(client)
+    retriever = Retriever()
 
-        if any(word in text for word in keywords):
-            relevant.append(ticket)
+    query_embedding = embedding_service.embed_text(question)
 
-    
-    print(f"Keywords used: {keywords}")
-    print(f"Found {len(relevant)} relevant tickets based on keywords.")
+    top_results = retriever.find_most_similar(
+        query_embedding=query_embedding,
+        tickets=saved_tickets,
+        top_k=3,
+    )
 
-    # fallback: if nothing matches, return all
-    return relevant if relevant else saved_tickets
+    print("\n--- Semantic Retrieval Debug ---")
+    for i, item in enumerate(top_results, start=1):
+        print(
+            f"{i}. Score={item['score']:.4f} | "
+            f"Issue={item['ticket'].get('issue', '')}"
+        )
+
+    relevant_tickets = [item["ticket"] for item in top_results]
+    return relevant_tickets

@@ -2,6 +2,15 @@ from app.workflows import process_ticket, answer_question
 from app.session import Session
 
 
+def format_ticket_for_display(ticket: dict) -> dict:
+    return {
+        "issue": ticket.get("issue", ""),
+        "actions_taken": ticket.get("actions_taken", ""),
+        "requested_resolution": ticket.get("requested_resolution", ""),
+        "priority": ticket.get("priority", ""),
+    }
+
+
 def handle_ticket(session: Session, user_input: str) -> dict:
     enriched_ticket = process_ticket(user_input)
     session.tickets.append(enriched_ticket)
@@ -13,13 +22,17 @@ def handle_question(session: Session, question: str) -> tuple[str, list]:
 
     qa_entry = {
         "question": question,
-        "retrieved_tickets": relevant_tickets,
+        "retrieved_tickets": [
+            format_ticket_for_display(ticket)
+            for ticket in relevant_tickets
+        ],
         "answer": answer
     }
 
     session.qa_history.append(qa_entry)
 
     return answer, relevant_tickets
+
 
 def handle_batch_tickets(session: Session, tickets: list[str]) -> list[dict]:
     processed = []

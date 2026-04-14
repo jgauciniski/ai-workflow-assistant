@@ -4,6 +4,16 @@ from app.services import handle_ticket, handle_question
 from app.session import Session, save_session, load_session
 from app.commands import handle_command
 
+
+def format_ticket_for_display(ticket: dict) -> dict:
+    return {
+        "issue": ticket.get("issue", ""),
+        "actions_taken": ticket.get("actions_taken", ""),
+        "requested_resolution": ticket.get("requested_resolution", ""),
+        "priority": ticket.get("priority", ""),
+    }
+
+
 print("AI Workflow Assistant")
 print("Type a support ticket OR ask a question (type 'exit' to quit)\n")
 
@@ -17,7 +27,7 @@ try:
         )
     else:
         print("No previous session found. Starting fresh.")
-    
+
 except RuntimeError as error:
     print(f"Warning: {error}")
     print("Starting with a fresh session instead.\n")
@@ -39,11 +49,16 @@ while True:
             question = user_input[len("question:"):].strip()
             answer, relevant_tickets = handle_question(session, question)
 
-            print(f"\nRetrieved {len(relevant_tickets)} ticket(s):")
-            print(json.dumps(relevant_tickets, indent=2))
+            display_tickets = [
+                format_ticket_for_display(ticket)
+                for ticket in relevant_tickets
+            ]
+
+            print(f"\nRetrieved {len(display_tickets)} ticket(s):")
+            print(json.dumps(display_tickets, indent=2))
 
             print("\nAnswer:")
-            print(answer)           
+            print(answer)
 
             print("\n----------------------\n")
             continue
@@ -51,7 +66,7 @@ while True:
         enriched_ticket = handle_ticket(session, user_input)
 
         print("\nEnriched Output:")
-        print(json.dumps(enriched_ticket, indent=2))
+        print(json.dumps(format_ticket_for_display(enriched_ticket), indent=2))
 
     except Exception as error:
         print("Error:", error)

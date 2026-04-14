@@ -1,80 +1,98 @@
 [
   {
-    "issue": "Unable to access HR system",
-    "actions_taken": "Checked for internet connectivity and confirmed the issue persists across multiple devices.",
-    "requested_resolution": "Restore access to the HR system.",
-    "priority": "high"
-  },
-  {
-    "issue": "Did not receive order",
-    "actions_taken": "Checked order status",
-    "requested_resolution": "Help with locating the order",
-    "priority": "medium"
-  },
-  {
-    "question": "how long takes to get a response from technical support?",
+    "question": "Which ticket is about HR portal access?",
     "retrieved_tickets": [
       {
-        "issue": "Unable to access HR system",
-        "actions_taken": "Checked for internet connectivity and confirmed the issue persists across multiple devices.",
-        "requested_resolution": "Restore access to the HR system.",
+        "issue": "Employee cannot log into the internal HR portal despite resetting the password twice and trying another browser.",
+        "actions_taken": "Password reset twice and attempted access using another browser.",
+        "requested_resolution": "Employee needs access today to download tax documents.",
         "priority": "high"
       },
       {
-        "issue": "Did not receive order",
-        "actions_taken": "Checked order status",
-        "requested_resolution": "Help with locating the order",
-        "priority": "medium"
-      },
-      {
-        "issue": "User dislikes the colors of the tech support session on the website.",
-        "actions_taken": "No actions taken yet.",
-        "requested_resolution": "Change the colors of the tech support session on the website.",
+        "issue": "User wants to change the color of the system buttons.",
+        "actions_taken": "User has not tried any troubleshooting steps.",
+        "requested_resolution": "Change the color of the system buttons.",
         "priority": "low"
       },
       {
-        "issue": "The website is offline.",
-        "actions_taken": "Checked server status and confirmed downtime.",
-        "requested_resolution": "Restore website functionality.",
+        "issue": "The mobile app crashes during checkout.",
+        "actions_taken": "User tried uninstalling and reinstalling the app.",
+        "requested_resolution": "User wants to complete the purchase before tonight\u2019s promotion ends.",
         "priority": "high"
       }
     ],
-    "answer": "The provided data does not include information about response times from technical support."
+    "answer": "The ticket about HR portal access is the first one, which states: \"Employee cannot log into the internal HR portal despite resetting the password twice and trying another browser.\""
   },
   {
-    "question": "is there a phone number for tech support?",
+    "question": "Was there any urgent login issue?",
     "retrieved_tickets": [
       {
-        "issue": "Unable to access HR system",
-        "actions_taken": "Checked for internet connectivity and confirmed the issue persists across multiple devices.",
-        "requested_resolution": "Restore access to the HR system.",
+        "issue": "Employee cannot log into the internal HR portal despite resetting the password twice and trying another browser.",
+        "actions_taken": "Password reset twice and attempted access using another browser.",
+        "requested_resolution": "Employee needs access today to download tax documents.",
         "priority": "high"
       },
       {
-        "issue": "Did not receive order",
-        "actions_taken": "Checked order status",
-        "requested_resolution": "Help with locating the order",
-        "priority": "medium"
-      },
-      {
-        "issue": "User dislikes the colors of the tech support session on the website.",
-        "actions_taken": "No actions taken yet.",
-        "requested_resolution": "Change the colors of the tech support session on the website.",
-        "priority": "low"
-      },
-      {
-        "issue": "The website is offline.",
-        "actions_taken": "Checked server status and confirmed downtime.",
-        "requested_resolution": "Restore website functionality.",
+        "issue": "The mobile app crashes during checkout.",
+        "actions_taken": "User tried uninstalling and reinstalling the app.",
+        "requested_resolution": "User wants to complete the purchase before tonight\u2019s promotion ends.",
         "priority": "high"
       },
       {
-        "issue": "Did not receive response from support",
-        "actions_taken": "Checked email for responses and submitted a follow-up inquiry",
-        "requested_resolution": "Prompt response from support team",
-        "priority": "medium"
+        "issue": "Customer's order was marked as delivered, but they never received it. They have checked with neighbors and the building front desk.",
+        "actions_taken": "Informed customer that we need to investigate the delivery status.",
+        "requested_resolution": "Customer wants either a replacement or a refund as soon as possible.",
+        "priority": "high"
       }
     ],
-    "answer": "The provided data does not include any information about a phone number for tech support."
+    "answer": "Yes, there was an urgent login issue where an employee could not log into the internal HR portal despite resetting the password twice and trying another browser. The priority for this issue was marked as high, and the employee needed access to download tax documents that same day."
+  },
+  {
+    "question": "Which issue involved tax documents?",
+    "retrieved_tickets": [
+      {
+        "issue": "Employee cannot log into the internal HR portal despite resetting the password twice and trying another browser.",
+        "actions_taken": "Password reset twice and attempted access using another browser.",
+        "requested_resolution": "Employee needs access today to download tax documents.",
+        "priority": "high"
+      },
+      {
+        "issue": "Customer's order was marked as delivered, but they never received it. They have checked with neighbors and the building front desk.",
+        "actions_taken": "Informed customer that we need to investigate the delivery status.",
+        "requested_resolution": "Customer wants either a replacement or a refund as soon as possible.",
+        "priority": "high"
+      },
+      {
+        "issue": "The mobile app crashes during checkout.",
+        "actions_taken": "User tried uninstalling and reinstalling the app.",
+        "requested_resolution": "User wants to complete the purchase before tonight\u2019s promotion ends.",
+        "priority": "high"
+      }
+    ],
+    "answer": "The issue involving tax documents was related to the employee who could not log into the internal HR portal to download them."
+  },
+  {
+    "question": "is there any urgent issue?",
+    "retrieved_tickets": [
+      {
+        "issue": "Customer's order was marked as delivered, but they never received it. They have checked with neighbors and the building front desk.",
+        "actions_taken": "Informed customer that we need to investigate the delivery status.",
+        "requested_resolution": "Customer wants either a replacement or a refund as soon as possible.",
+        "priority": "high"
+      },
+      {
+        "issue": "The mobile app crashes during checkout.",
+        "actions_taken": "User tried uninstalling and reinstalling the app.",
+        "requested_resolution": "User wants to complete the purchase before tonight\u2019s promotion ends.",
+        "priority": "high"
+      },
+      {
+        "issue": "Employee cannot log into the internal HR portal despite resetting the password twice and trying another browser.",
+        "actions_taken": "Password reset twice and attempted access using another browser.",
+        "requested_resolution": "Employee needs access today to download tax documents.",
+        "priority": "high"
+      }
+    ],
+    "answer": "Yes, all three issues listed have a priority of \"high,\" indicating that they are urgent."
   }
 ]
