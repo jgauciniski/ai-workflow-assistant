@@ -16,11 +16,16 @@ class Retriever:
 
         return dot_product / (norm1 * norm2)
 
+    # Find the most similar tickets based on cosine similarity of embeddings
+    # Filter weak semantic matches so low-relevance tickets are not sent to the LLM.
     def find_most_similar(
         self,
         query_embedding: list[float],
         tickets: list[dict[str, Any]],
+        # Number of top results to return
         top_k: int = 3,
+        # Minimum similarity score threshold for results
+        min_score: float = 0.25,
     ) -> list[dict[str, Any]]:
         scored_tickets = []
 
@@ -31,10 +36,11 @@ class Retriever:
 
             score = self.cosine_similarity(query_embedding, ticket_embedding)
 
-            scored_tickets.append({
-                "score": score,
-                "ticket": ticket
-            })
+            if score >= min_score:
+                scored_tickets.append({
+                    "score": score,
+                    "ticket": ticket
+                })
 
         scored_tickets.sort(key=lambda item: item["score"], reverse=True)
 

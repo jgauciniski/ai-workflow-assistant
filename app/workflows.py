@@ -11,14 +11,23 @@ from app.prompts import (
     QUESTION_ANSWER_PROMPT,
 )
 from app.retrieval import EmbeddingService, Retriever
+from app.retrieval.documents import build_retrieval_document
 
-def build_ticket_text(ticket: dict) -> str:
-    return f"""
+# Format a list of tickets into a string suitable for LLM input
+def format_tickets_for_llm(tickets: list[dict]) -> str:
+    formatted = []
+
+    for i, ticket in enumerate(tickets, start=1):
+        entry = f"""
+Ticket #{i}
 Issue: {ticket.get("issue", "")}
 Actions taken: {ticket.get("actions_taken", "")}
 Requested resolution: {ticket.get("requested_resolution", "")}
 Priority: {ticket.get("priority", "")}
-""".strip()
+"""
+        formatted.append(entry.strip())
+
+    return "\n\n".join(formatted)
 
 def process_ticket(ticket_text: str) -> dict:
     extraction_result = ask_llm(
@@ -53,9 +62,9 @@ Requested resolution: {parsed_ticket["requested_resolution"]}
 
     client = OpenAI(api_key=api_key)
     embedding_service = EmbeddingService(client)
-
+    # Add embedding to the enriched ticket for future retrieval
     enriched_ticket["embedding"] = embedding_service.embed_text(
-        build_ticket_text(enriched_ticket)
+        build_retrieval_document(enriched_ticket)
     )
 
     return enriched_ticket
@@ -63,14 +72,19 @@ Requested resolution: {parsed_ticket["requested_resolution"]}
 
 def answer_question(saved_tickets: list, question: str) -> tuple[str, list]:
     relevant_tickets = select_relevant_tickets(saved_tickets, question)
-    context = json.dumps(relevant_tickets, indent=2)
+    formatted_context = format_tickets_for_llm(relevant_tickets)
 
     user_prompt = f"""
-Data:
-{context}
+You are an assistant helping analyze support tickets.
+
+Here are the most relevant tickets:
+
+{formatted_context}
 
 Question:
 {question}
+
+Answer clearly and based only on the provided tickets.
 """
 
     answer = ask_llm(
@@ -99,6 +113,7 @@ def select_relevant_tickets(saved_tickets: list, question: str) -> list:
         query_embedding=query_embedding,
         tickets=saved_tickets,
         top_k=3,
+        min_score=0.25,
     )
 
     print("\n--- Semantic Retrieval Debug ---")

@@ -94,5 +94,203 @@
       }
     ],
     "answer": "Yes, all three issues listed have a priority of \"high,\" indicating that they are urgent."
+  },
+  {
+    "question": "Which ticket is about HR portal access?",
+    "retrieved_tickets": [
+      {
+        "issue": "Employee cannot log into the internal HR portal despite resetting the password twice and trying another browser.",
+        "actions_taken": "Password reset twice and attempted access using another browser.",
+        "requested_resolution": "Employee needs access today to download tax documents.",
+        "priority": "high"
+      }
+    ],
+    "answer": "The ticket about HR portal access is related to the issue where an employee cannot log into the internal HR portal despite resetting the password twice and trying another browser. The employee requires access to download tax documents and it is marked with high priority."
+  },
+  {
+    "question": "Was there any urgent login issue?",
+    "retrieved_tickets": [
+      {
+        "issue": "Employee cannot log into the internal HR portal despite resetting the password twice and trying another browser.",
+        "actions_taken": "Password reset twice and attempted access using another browser.",
+        "requested_resolution": "Employee needs access today to download tax documents.",
+        "priority": "high"
+      }
+    ],
+    "answer": "Yes, there was an urgent login issue. An employee could not log into the internal HR portal and required access today to download tax documents, making the priority high."
+  },
+  {
+    "question": "Which issue involved tax documents?",
+    "retrieved_tickets": [
+      {
+        "issue": "Employee cannot log into the internal HR portal despite resetting the password twice and trying another browser.",
+        "actions_taken": "Password reset twice and attempted access using another browser.",
+        "requested_resolution": "Employee needs access today to download tax documents.",
+        "priority": "high"
+      }
+    ],
+    "answer": "The issue involving tax documents is where the employee cannot log into the internal HR portal despite resetting the password twice and trying another browser. The employee requested access today to download tax documents."
+  },
+  {
+    "question": "Which ticket is about HR portal access?",
+    "retrieved_tickets": [
+      {
+        "issue": "Employee cannot log into the internal HR portal despite resetting the password twice and trying another browser.",
+        "actions_taken": "Password reset twice and attempted access using another browser.",
+        "requested_resolution": "Employee needs access today to download tax documents.",
+        "priority": "high"
+      }
+    ],
+    "answer": "The ticket regarding HR portal access is the one where the employee cannot log into the internal HR portal despite resetting the password twice and trying another browser. The employee needs access today to download tax documents, and the priority is high."
+  },
+  {
+    "question": "Was there any urgent login issue?",
+    "retrieved_tickets": [
+      {
+        "issue": "Employee cannot log into the internal HR portal despite resetting the password twice and trying another browser.",
+        "actions_taken": "Password reset twice and attempted access using another browser.",
+        "requested_resolution": "Employee needs access today to download tax documents.",
+        "priority": "high"
+      }
+    ],
+    "answer": "Yes, there was a high-priority issue where an employee could not log into the internal HR portal despite resetting the password twice and trying another browser. The employee needed access urgently to download tax documents."
+  },
+  {
+    "question": "Was there any urgent login issue?",
+    "retrieved_tickets": [
+      {
+        "issue": "Employee cannot log into the internal HR portal despite resetting the password twice and trying another browser.",
+        "actions_taken": "Password reset twice and attempted access using another browser.",
+        "requested_resolution": "Employee needs access today to download tax documents.",
+        "priority": "high"
+      },
+      {
+        "issue": "The mobile app crashes during checkout.",
+        "actions_taken": "User tried uninstalling and reinstalling the app.",
+        "requested_resolution": "User wants to complete the purchase before tonight\u2019s promotion ends.",
+        "priority": "high"
+      },
+      {
+        "issue": "Customer's order was marked as delivered, but they never received it. They have checked with neighbors and the building front desk.",
+        "actions_taken": "Informed customer that we need to investigate the delivery status.",
+        "requested_resolution": "Customer wants either a replacement or a refund as soon as possible.",
+        "priority": "high"
+      }
+    ],
+    "answer": "Yes, there was an urgent login issue reported by an employee who could not log into the internal HR portal despite resetting the password twice and trying another browser. The employee needed access to download tax documents today, which was indicated as a high priority."
+  },
+  {
+    "question": "Was there any urgent issue?",
+    "retrieved_tickets": [
+      {
+        "issue": "Customer's order was marked as delivered, but they never received it. They have checked with neighbors and the building front desk.",
+        "actions_taken": "Informed customer that we need to investigate the delivery status.",
+        "requested_resolution": "Customer wants either a replacement or a refund as soon as possible.",
+        "priority": "high"
+      },
+      {
+        "issue": "The mobile app crashes during checkout.",
+        "actions_taken": "User tried uninstalling and reinstalling the app.",
+        "requested_resolution": "User wants to complete the purchase before tonight\u2019s promotion ends.",
+        "priority": "high"
+      },
+      {
+        "issue": "Employee cannot log into the internal HR portal despite resetting the password twice and trying another browser.",
+        "actions_taken": "Password reset twice and attempted access using another browser.",
+        "requested_resolution": "Employee needs access today to download tax documents.",
+        "priority": "high"
+      }
+    ],
+    "answer": "Yes, there were urgent issues. All reported issues were marked with a high priority, indicating they are urgent."
+  },
+  {
+    "question": "Was there any urgent issues?",
+    "retrieved_tickets": [
+      {
+        "issue": "Customer's order was marked as delivered, but they never received it. They have checked with neighbors and the building front desk.",
+        "actions_taken": "Informed customer that we need to investigate the delivery status.",
+        "requested_resolution": "Customer wants either a replacement or a refund as soon as possible.",
+        "priority": "high"
+      }
+    ],
+    "answer": "Yes, there is an urgent issue. The customer's order was marked as delivered, but they never received it, and they want either a replacement or a refund as soon as possible. The priority of the issue is marked as high."
+  },
+  {
+    "question": "was there any urgent issue?",
+    "retrieved_tickets": [
+      {
+        "issue": "Customer's order was marked as delivered, but they never received it. They have checked with neighbors and the building front desk.",
+        "actions_taken": "Informed customer that we need to investigate the delivery status.",
+        "requested_resolution": "Customer wants either a replacement or a refund as soon as possible.",
+        "priority": "high"
+      },
+      {
+        "issue": "Employee cannot log into the internal HR portal despite resetting the password twice and trying another browser.",
+        "actions_taken": "Password reset twice and attempted access using another browser.",
+        "requested_resolution": "Employee needs access today to download tax documents.",
+        "priority": "high"
+      },
+      {
+        "issue": "The mobile app crashes during checkout.",
+        "actions_taken": "User tried uninstalling and reinstalling the app.",
+        "requested_resolution": "User wants to complete the purchase before tonight\u2019s promotion ends.",
+        "priority": "high"
+      }
+    ],
+    "answer": "Yes, all three issues reported have a priority labeled as \"high,\" indicating that they are urgent."
+  },
+  {
+    "question": "was there any urgent issues?",
+    "retrieved_tickets": [
+      {
+        "issue": "Customer's order was marked as delivered, but they never received it. They have checked with neighbors and the building front desk.",
+        "actions_taken": "Informed customer that we need to investigate the delivery status.",
+        "requested_resolution": "Customer wants either a replacement or a refund as soon as possible.",
+        "priority": "high"
+      }
+    ],
+    "answer": "Yes, there is an urgent issue as the customer has not received their order despite it being marked as delivered, and they have requested a replacement or refund as soon as possible. The priority is high."
+  },
+  {
+    "question": "is there any urgent ticket?",
+    "retrieved_tickets": [
+      {
+        "issue": "Customer's order was marked as delivered, but they never received it. They have checked with neighbors and the building front desk.",
+        "actions_taken": "Informed customer that we need to investigate the delivery status.",
+        "requested_resolution": "Customer wants either a replacement or a refund as soon as possible.",
+        "priority": "high"
+      },
+      {
+        "issue": "The mobile app crashes during checkout.",
+        "actions_taken": "User tried uninstalling and reinstalling the app.",
+        "requested_resolution": "User wants to complete the purchase before tonight\u2019s promotion ends.",
+        "priority": "high"
+      },
+      {
+        "issue": "Employee cannot log into the internal HR portal despite resetting the password twice and trying another browser.",
+        "actions_taken": "Password reset twice and attempted access using another browser.",
+        "requested_resolution": "Employee needs access today to download tax documents.",
+        "priority": "high"
+      }
+    ],
+    "answer": "Yes, all three tickets are marked as high priority, indicating that they are urgent."
+  },
+  {
+    "question": "is there any urgent ticket related to HR portal?",
+    "retrieved_tickets": [
+      {
+        "issue": "Employee cannot log into the internal HR portal despite resetting the password twice and trying another browser.",
+        "actions_taken": "Password reset twice and attempted access using another browser.",
+        "requested_resolution": "Employee needs access today to download tax documents.",
+        "priority": "high"
+      },
+      {
+        "issue": "User wants to change the color of the system buttons.",
+        "actions_taken": "User has not tried any troubleshooting steps.",
+        "requested_resolution": "Change the color of the system buttons.",
+        "priority": "low"
+      }
+    ],
+    "answer": "Yes, there is an urgent ticket related to the HR portal. Ticket #1 has a high priority and the employee needs access today to download tax documents."
   }
 ]

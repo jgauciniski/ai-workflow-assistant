@@ -1,6 +1,6 @@
 from openai import OpenAI
 
-
+# Service to generate embeddings for text using OpenAI's API
 class EmbeddingService:
     def __init__(self, client: OpenAI, model: str = "text-embedding-3-small"):
         self.client = client
