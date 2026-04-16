@@ -1,6 +1,21 @@
-from app.workflows import process_ticket, answer_question
+from app.workflows import process_ticket, answer_question, classify_intent,select_tool
 from app.session import Session
 
+def handle_user_input(session: Session, user_input: str) -> tuple[str, list]:
+    #I started with intent classification, then evolved the system to tool-based routing for better extensibility.
+    """intent = classify_intent(user_input)
+
+    if intent == "question":
+        return handle_question(session, user_input)
+
+    return handle_ticket(session, user_input), []"""
+
+    tool = select_tool(user_input)
+
+    if tool == "answer_question":
+        return handle_question(session, user_input)
+
+    return handle_ticket(session, user_input), []
 
 def format_ticket_for_display(ticket: dict) -> dict:
     return {

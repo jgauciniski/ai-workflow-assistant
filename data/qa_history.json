@@ -292,5 +292,29 @@
       }
     ],
     "answer": "Yes, there is an urgent ticket related to the HR portal. Ticket #1 has a high priority and the employee needs access today to download tax documents."
+  },
+  {
+    "question": "is there a low priority issue?",
+    "retrieved_tickets": [
+      {
+        "issue": "Customer's order was marked as delivered, but they never received it. They have checked with neighbors and the building front desk.",
+        "actions_taken": "Informed customer that we need to investigate the delivery status.",
+        "requested_resolution": "Customer wants either a replacement or a refund as soon as possible.",
+        "priority": "high"
+      },
+      {
+        "issue": "User wants to change the color of the system buttons.",
+        "actions_taken": "User has not tried any troubleshooting steps.",
+        "requested_resolution": "Change the color of the system buttons.",
+        "priority": "low"
+      },
+      {
+        "issue": "The mobile app crashes during checkout.",
+        "actions_taken": "User tried uninstalling and reinstalling the app.",
+        "requested_resolution": "User wants to complete the purchase before tonight\u2019s promotion ends.",
+        "priority": "high"
+      }
+    ],
+    "answer": "Yes, there is a low priority issue, which is Ticket #2 regarding the user wanting to change the color of the system buttons."
   }
 ]

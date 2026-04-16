@@ -9,9 +9,31 @@ from app.prompts import (
     EXTRACTION_PROMPT,
     CLASSIFICATION_PROMPT,
     QUESTION_ANSWER_PROMPT,
+    INTENT_CLASSIFICATION_PROMPT,
+    TICKET_SUMMARY_PROMPT,
+    TOOL_SELECTION_PROMPT
 )
 from app.retrieval import EmbeddingService, Retriever
 from app.retrieval.documents import build_retrieval_document
+
+
+def classify_intent(user_input: str) -> str:
+    response = ask_llm(
+        system_prompt=INTENT_CLASSIFICATION_PROMPT,
+        user_prompt=user_input
+    )
+
+    parsed = json.loads(response)
+    return parsed.get("intent", "ticket")
+
+def select_tool(user_input: str) -> str:
+    response = ask_llm(
+        system_prompt=TOOL_SELECTION_PROMPT,
+        user_prompt=user_input
+    )
+
+    parsed = json.loads(response)
+    return parsed.get("tool", "process_ticket")
 
 # Format a list of tickets into a string suitable for LLM input
 def format_tickets_for_llm(tickets: list[dict]) -> str:
@@ -25,6 +47,7 @@ Actions taken: {ticket.get("actions_taken", "")}
 Requested resolution: {ticket.get("requested_resolution", "")}
 Priority: {ticket.get("priority", "")}
 """
+        
         formatted.append(entry.strip())
 
     return "\n\n".join(formatted)
@@ -49,11 +72,23 @@ Requested resolution: {parsed_ticket["requested_resolution"]}
     parsed_priority = json.loads(classification_result)
 
     enriched_ticket = {
-        "issue": parsed_ticket["issue"],
-        "actions_taken": parsed_ticket["actions_taken"],
-        "requested_resolution": parsed_ticket["requested_resolution"],
-        "priority": parsed_priority["priority"]
+"issue": parsed_ticket["issue"],
+"actions_taken": parsed_ticket["actions_taken"],
+"requested_resolution": parsed_ticket["requested_resolution"],
+"priority": parsed_priority["priority"]
     }
+
+    summary_input = f"""
+Issue: {enriched_ticket["issue"]}
+Priority: {enriched_ticket["priority"]}
+"""
+
+    summary = ask_llm(
+        system_prompt=TICKET_SUMMARY_PROMPT,
+        user_prompt=summary_input
+    )
+
+    enriched_ticket["summary"] = summary.strip()
 
     load_dotenv()
     api_key = os.getenv("OPENAI_API_KEY")
