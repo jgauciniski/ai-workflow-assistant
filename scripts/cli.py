@@ -2,17 +2,8 @@ import json
 
 from app.services import handle_user_input
 from app.session import Session, save_session, load_session
+from app.utils.formatters import format_ticket_for_display
 from app.commands import handle_command
-
-
-def format_ticket_for_display(ticket: dict) -> dict:
-    return {
-        "issue": ticket.get("issue", ""),
-        "actions_taken": ticket.get("actions_taken", ""),
-        "requested_resolution": ticket.get("requested_resolution", ""),
-        "priority": ticket.get("priority", ""),
-        "summary": ticket.get("summary", ""),
-    }
 
 
 def main():
@@ -61,8 +52,12 @@ def main():
                 print("\nAnswer:")
                 print(result)
             else:
-                print("\nEnriched Output:")
-                print(json.dumps(format_ticket_for_display(result), indent=2))
+                if isinstance(result, str):
+                    print("\nAnswer:")
+                    print(result)
+                else:
+                    print("\nEnriched Output:")
+                    print(json.dumps(format_ticket_for_display(result), indent=2))
 
         except Exception as error:
             print("Error:", error)

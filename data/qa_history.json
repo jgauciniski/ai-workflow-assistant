@@ -316,5 +316,88 @@
       }
     ],
     "answer": "Yes, there is a low priority issue, which is Ticket #2 regarding the user wanting to change the color of the system buttons."
+  },
+  {
+    "question": "how many tickets do we have?",
+    "retrieved_tickets": [],
+    "answer": "The provided data does not specify the number of tickets. Therefore, I cannot answer how many tickets there are."
+  },
+  {
+    "question": "how many low priority issues do we have?",
+    "retrieved_tickets": [
+      {
+        "issue": "User wants to change the color of the system buttons.",
+        "actions_taken": "User has not tried any troubleshooting steps.",
+        "requested_resolution": "Change the color of the system buttons.",
+        "priority": "low"
+      },
+      {
+        "issue": "Customer's order was marked as delivered, but they never received it. They have checked with neighbors and the building front desk.",
+        "actions_taken": "Informed customer that we need to investigate the delivery status.",
+        "requested_resolution": "Customer wants either a replacement or a refund as soon as possible.",
+        "priority": "high"
+      },
+      {
+        "issue": "Cannot access username",
+        "actions_taken": "Attempted to log in multiple times; checked for correct credentials.",
+        "requested_resolution": "Reset username or provide access instructions.",
+        "priority": "high"
+      }
+    ],
+    "answer": "We have 1 low priority issue."
+  },
+  {
+    "question": "how many tickets do we have that is medium priority?",
+    "retrieved_tickets": [
+      {
+        "issue": "Customer's order was marked as delivered, but they never received it. They have checked with neighbors and the building front desk.",
+        "actions_taken": "Informed customer that we need to investigate the delivery status.",
+        "requested_resolution": "Customer wants either a replacement or a refund as soon as possible.",
+        "priority": "high",
+        "summary": ""
+      },
+      {
+        "issue": "User wants to change the color of the system buttons.",
+        "actions_taken": "User has not tried any troubleshooting steps.",
+        "requested_resolution": "Change the color of the system buttons.",
+        "priority": "low",
+        "summary": ""
+      },
+      {
+        "issue": "Employee cannot log into the internal HR portal despite resetting the password twice and trying another browser.",
+        "actions_taken": "Password reset twice and attempted access using another browser.",
+        "requested_resolution": "Employee needs access today to download tax documents.",
+        "priority": "high",
+        "summary": ""
+      }
+    ],
+    "answer": "There are no tickets with medium priority. All tickets are either high or low priority."
+  },
+  {
+    "question": "how many low priority issues do we have?",
+    "retrieved_tickets": [
+      {
+        "issue": "User wants to change the color of the system buttons.",
+        "actions_taken": "User has not tried any troubleshooting steps.",
+        "requested_resolution": "Change the color of the system buttons.",
+        "priority": "low",
+        "summary": ""
+      },
+      {
+        "issue": "Customer's order was marked as delivered, but they never received it. They have checked with neighbors and the building front desk.",
+        "actions_taken": "Informed customer that we need to investigate the delivery status.",
+        "requested_resolution": "Customer wants either a replacement or a refund as soon as possible.",
+        "priority": "high",
+        "summary": ""
+      },
+      {
+        "issue": "Cannot access username",
+        "actions_taken": "Attempted to log in multiple times; checked for correct credentials.",
+        "requested_resolution": "Reset username or provide access instructions.",
+        "priority": "high",
+        "summary": "User cannot access their username, and the issue is high priority."
+      }
+    ],
+    "answer": "There is 1 low priority issue."
   }
 ]

@@ -15,24 +15,28 @@ from app.prompts import (
 )
 from app.retrieval import EmbeddingService, Retriever
 from app.retrieval.documents import build_retrieval_document
+from app.utils.json_utils import safe_json_loads
+from app.utils.retry import retry
+from app.utils.validators import validate_priority, validate_ticket
+from app.models.ticket import Ticket
 
-
+#not being used right now, but keeping the intent classification code in case I want to pivot back to that approach. The tool selection is more flexible for now and doesn't require a strict intent schema.
 def classify_intent(user_input: str) -> str:
-    response = ask_llm(
+    response = retry(lambda: ask_llm(
         system_prompt=INTENT_CLASSIFICATION_PROMPT,
         user_prompt=user_input
-    )
+    ), label="Intent Classification")
 
-    parsed = json.loads(response)
+    parsed = safe_json_loads(response)
     return parsed.get("intent", "ticket")
 
 def select_tool(user_input: str) -> str:
-    response = ask_llm(
+    response =  retry(lambda: ask_llm(
         system_prompt=TOOL_SELECTION_PROMPT,
         user_prompt=user_input
-    )
+    ), label="Tool Selection")
 
-    parsed = json.loads(response)
+    parsed = safe_json_loads(response)
     return parsed.get("tool", "process_ticket")
 
 # Format a list of tickets into a string suitable for LLM input
@@ -53,11 +57,14 @@ Priority: {ticket.get("priority", "")}
     return "\n\n".join(formatted)
 
 def process_ticket(ticket_text: str) -> dict:
-    extraction_result = ask_llm(
+    extraction_result = retry(lambda: ask_llm(
         system_prompt=EXTRACTION_PROMPT,
         user_prompt=ticket_text
+    ), label="Ticket Extraction")
+
+    parsed_ticket = validate_ticket(
+        safe_json_loads(extraction_result)
     )
-    parsed_ticket = json.loads(extraction_result)
 
     ticket_summary = f"""
 Issue: {parsed_ticket["issue"]}
@@ -65,30 +72,34 @@ Actions taken: {parsed_ticket["actions_taken"]}
 Requested resolution: {parsed_ticket["requested_resolution"]}
 """
 
-    classification_result = ask_llm(
+    classification_result = retry(lambda: ask_llm(
         system_prompt=CLASSIFICATION_PROMPT,
         user_prompt=ticket_summary
+    ), label="Priority Classification")
+    parsed_priority = validate_priority(
+        safe_json_loads(classification_result)
     )
-    parsed_priority = json.loads(classification_result)
 
-    enriched_ticket = {
-"issue": parsed_ticket["issue"],
-"actions_taken": parsed_ticket["actions_taken"],
-"requested_resolution": parsed_ticket["requested_resolution"],
-"priority": parsed_priority["priority"]
-    }
+    ticket_obj = Ticket(
+        issue=parsed_ticket["issue"],
+        actions_taken=parsed_ticket["actions_taken"],
+        requested_resolution=parsed_ticket["requested_resolution"],
+        priority=parsed_priority["priority"],
+    )
 
     summary_input = f"""
-Issue: {enriched_ticket["issue"]}
-Priority: {enriched_ticket["priority"]}
+Issue: {ticket_obj.issue}
+Priority: {ticket_obj.priority}
 """
 
-    summary = ask_llm(
+    summary = retry(lambda: ask_llm(
         system_prompt=TICKET_SUMMARY_PROMPT,
         user_prompt=summary_input
-    )
+    ), label="Ticket Summary")
 
-    enriched_ticket["summary"] = summary.strip()
+    ticket_obj.summary = summary.strip()
+
+    enriched_ticket = ticket_obj.to_dict()
 
     load_dotenv()
     api_key = os.getenv("OPENAI_API_KEY")
@@ -97,7 +108,7 @@ Priority: {enriched_ticket["priority"]}
 
     client = OpenAI(api_key=api_key)
     embedding_service = EmbeddingService(client)
-    # Add embedding to the enriched ticket for future retrieval
+
     enriched_ticket["embedding"] = embedding_service.embed_text(
         build_retrieval_document(enriched_ticket)
     )
@@ -122,10 +133,10 @@ Question:
 Answer clearly and based only on the provided tickets.
 """
 
-    answer = ask_llm(
+    answer =  retry(lambda: ask_llm(
         system_prompt=QUESTION_ANSWER_PROMPT,
         user_prompt=user_prompt
-    )
+    ), label="Question Answering")
 
     return answer, relevant_tickets
 

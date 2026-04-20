@@ -3,6 +3,7 @@ from typing import Any
 
 
 class Retriever:
+    # Compute cosine similarity between two vectors
     def cosine_similarity(self, vec1: list[float], vec2: list[float]) -> float:
         if len(vec1) != len(vec2):
             raise ValueError("Vectors must have the same length.")

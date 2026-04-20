@@ -1,14 +1,23 @@
-from app.workflows import process_ticket, answer_question, classify_intent,select_tool
+from app.workflows import process_ticket, answer_question, select_tool
 from app.session import Session
+from app.utils.formatters import format_ticket_for_display
 
-def handle_user_input(session: Session, user_input: str) -> tuple[str, list]:
-    #I started with intent classification, then evolved the system to tool-based routing for better extensibility.
-    """intent = classify_intent(user_input)
+def handle_simple_queries(session: Session, user_input: str) -> tuple[object, list] | None:
+    text = user_input.lower()
 
-    if intent == "question":
-        return handle_question(session, user_input)
+    if "how many tickets" in text:
+        return f"You have {len(session.tickets)} tickets.", []
 
-    return handle_ticket(session, user_input), []"""
+    if "list tickets" in text:
+        return session.tickets, session.tickets
+
+    return None
+
+def handle_user_input(session: Session, user_input: str) -> tuple[object, list]:
+    simple_result = handle_simple_queries(session, user_input)
+
+    if simple_result:
+        return simple_result
 
     tool = select_tool(user_input)
 
@@ -16,14 +25,6 @@ def handle_user_input(session: Session, user_input: str) -> tuple[str, list]:
         return handle_question(session, user_input)
 
     return handle_ticket(session, user_input), []
-
-def format_ticket_for_display(ticket: dict) -> dict:
-    return {
-        "issue": ticket.get("issue", ""),
-        "actions_taken": ticket.get("actions_taken", ""),
-        "requested_resolution": ticket.get("requested_resolution", ""),
-        "priority": ticket.get("priority", ""),
-    }
 
 
 def handle_ticket(session: Session, user_input: str) -> dict:
@@ -57,3 +58,4 @@ def handle_batch_tickets(session: Session, tickets: list[str]) -> list[dict]:
         processed.append(enriched_ticket)
 
     return processed
+
