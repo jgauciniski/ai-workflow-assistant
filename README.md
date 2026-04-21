@@ -81,38 +81,39 @@ data/
 
 ### 🎫 Ticket Processing
 
-
+```
 User Input
-↓
+   ↓
 LLM Extraction (structured JSON)
-↓
+   ↓
 Validation
-↓
+   ↓
 Priority Classification
-↓
+   ↓
 Summary Generation
-↓
+   ↓
 Build Retrieval Document
-↓
+   ↓
 Generate Embedding
-↓
+   ↓
 Store Ticket
-
+```
 
 ### 🔍 Question Answering (RAG)
 
-
+```
 User Question
-↓
+   ↓
 Generate Embedding
-↓
+   ↓
 Semantic Search (Cosine Similarity)
-↓
+   ↓
 Retrieve Top-K Tickets
-↓
+   ↓
 Build Context
-↓
+   ↓
 LLM Generates Answer
+```
 
 ---
 
